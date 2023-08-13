@@ -9,7 +9,7 @@ use std::collections::HashMap;
 mod bkrs;
 use bkrs::BKRS;
 
-const BKRS_VOCA_PATH: &str = "data/bkrs.json";
+const BKRS_VOCA_PATH: &str = ".\\data\\bkrs.json";
 // const BKRS_FORMS_PATH: &str = "data/bkrsForms.json";
 
 const GT_HI: &str = "tr_to_si";

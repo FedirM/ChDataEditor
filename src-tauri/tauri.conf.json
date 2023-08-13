@@ -30,6 +30,7 @@
     },
     "bundle": {
       "active": true,
+      "resources": ["data/bkrs.json"],
       "targets": "all",
       "identifier": "com.chinese.creator",
       "icon": [
