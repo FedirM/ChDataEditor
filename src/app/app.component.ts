@@ -48,7 +48,6 @@ export class AppComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.onDestroy$))
     .subscribe(m => {
       this.isTabDisabled = m === Mode.Editor;
-      console.log('Is disabled: ', this.isTabDisabled);
     })
   }
 
@@ -57,7 +56,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   onDragSplitArea(data: any): void {
-    console.log('On drag: ', data);
     localStorage.setItem('splitAreaSizes', JSON.stringify(data.sizes));
   }
   

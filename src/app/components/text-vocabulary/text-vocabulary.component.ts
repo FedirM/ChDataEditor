@@ -30,10 +30,7 @@ export class TextVocabularyComponent implements OnInit, OnDestroy {
       for(let i = 0; i < state.sentenceList.length; i++) {
         if(state.sentenceList[i].inFocus) {
           this.word_list = state.sentenceList[i].vocabulary;
-          // console.log('Sentence in focus: ', state.sentenceList[i]);
-          // console.log(`SELECTED: ${this.selected_sentence}  I: ${i}`);
           if(i !== this.selected_sentence) {
-            // console.log('selected_id: onInit');
             this.selected_id = -1;
             this.selected_sentence = i;
           }
@@ -52,6 +49,7 @@ export class TextVocabularyComponent implements OnInit, OnDestroy {
       this.word_list.at(this.selected_id)!.simplified = value.si;
       this.word_list.at(this.selected_id)!.pin        = value.pin;
       this.word_list.at(this.selected_id)!.ua         = value.ua;
+      this.word_list.at(this.selected_id)!.isChecked  = true;
 
       this.st.patchSentenceVoca(this.selected_sentence, this.word_list);
     });
@@ -64,7 +62,6 @@ export class TextVocabularyComponent implements OnInit, OnDestroy {
 
   changeId(i: number): void {
     this.selected_id = (i === this.selected_id) ? -1 : i;
-    // console.log('ChangedId: ', this.selected_id)
     this.word_form.patchValue({
       si: this.word_list.at(i)?.simplified,
       pin: this.word_list.at(i)?.pin,

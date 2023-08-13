@@ -75,7 +75,6 @@ export class StateService {
   }
 
   patchMode(mode: Mode) {
-    console.log('Patch mode: ', mode);
     this._mode.next(mode);
   }
 
@@ -114,7 +113,6 @@ export class StateService {
             };
           }
         });
-    console.log('Sentences: ', s);
     this._state.next({
       ...this._state.value,
       text
@@ -128,12 +126,16 @@ export class StateService {
     for(let s of s_list) {
       let counter = 0;
       for(let w of s.vocabulary) {
-        if(w.hi && w.pin && w.ua && w.simplified) {
+        if(w.hi.length && w.pin.length && w.ua.length && w.simplified.length) {
           w.isChecked = true;
           counter++;
         }
       }
-      if(s.vocabulary.length > 0 && counter === s.vocabulary.length) s.isChecked = true;
+      //@ts-ignore
+      s.isChecked = ( s.vocabulary.length > 0 &&
+                      counter === s.vocabulary.length &&
+                      s.data.length && s.simplified.length &&
+                      s.pin.length && s.ua.length );
     }
 
     this._state.next({
@@ -145,7 +147,7 @@ export class StateService {
 
   patchSentenceVoca(sentence_id: number, voca: Array<VocaItem>): void {
     this._state.value.sentenceList[sentence_id].vocabulary = voca;
-    this._state.next({...this._state.value});
+    this.patchSentences(this._state.value.sentenceList);
   }
 
   private getSelectedSentenceVoca(): void {
@@ -165,14 +167,9 @@ export class StateService {
         }
       }
 
-      this.patchSentenceVoca(ss.id, ss.vocabulary);
-      // this._state.next({
-      //   ...this._state.value,
-      //   sentenceList: [
-      //     ...this._state.value.sentenceList,
-      //     ss
-      //   ]
-      // });
+      // this.patchSentenceVoca(ss.id, ss.vocabulary);
+      this._state.value.sentenceList[ss.id].vocabulary = ss.vocabulary;
+      this._state.next(this._state.value);
     }).catch(err => console.error(err));
   }
 
@@ -199,7 +196,6 @@ export class StateService {
         }
         resolve(obj);
       }).catch(err => {
-        console.log('GET VOCA ERR: ', err);
         reject(err);
       })
     });

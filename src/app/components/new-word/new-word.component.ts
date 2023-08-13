@@ -44,10 +44,6 @@ export class NewWordComponent {
         }
       })
     }
-    
-    this.st.state$.subscribe(data => {
-      console.log('Patch sentences: ', data.sentenceList);
-    })
   }
 
   isAvailable(): boolean {

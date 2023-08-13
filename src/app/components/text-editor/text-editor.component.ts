@@ -46,7 +46,6 @@ export class TextEditorComponent implements OnInit, OnDestroy {
     for(let s of this.sentenceList) {
       if( s.inFocus && s.id !== id ) {
         s.inFocus = false;
-        s.isChecked = this.isChecked(id);
       }
       if( s.id === id ) {
         s.inFocus = true;
@@ -62,36 +61,15 @@ export class TextEditorComponent implements OnInit, OnDestroy {
       Promise.all([
         invoke('google_translator_hi', {text: this.text}),
         invoke('google_translator_ua', {text: this.text})
-      ]).then(res => {console.log('RES: ', res)})
+      ]).then(res => { console.log(res) })
       .catch(err => console.error(err));
-      
-      // invoke('google_translator_hi', {text: this.text})
-      // .then(res => console.log('RES: ', res))
-      // .catch(err => console.error(err));
-      
-      // invoke('google_translator_ua', {text: this.text})
-      // .then(res => console.log('RES: ', res))
-      // .catch(err => console.error(err));
     } else {
       this.view = Mode.Editor;
-      // Promise.all([
-      //   invoke('close_hi_win'),
-      //   invoke('close_ua_win')
-      // ]).then(res => {
-      //   console.log('Close: ', res);
-      // }).catch(err => {
-      //   console.log('Err: ', err);
-      // });
       invoke('close_all_text_win').then(res => {
-        console.log('Close hi win');
+        console.log(res);
       }).catch(err => {
-        console.log('Err: ', err);
+        console.error(err);
       });
-      // invoke('close_ua_win').then(res => {
-      //   console.log('Close ua win');
-      // }).catch(err => {
-      //   console.log('Err: ', err);
-      // });
     }
     this.st.patchMode(this.view);
   }
@@ -105,13 +83,13 @@ export class TextEditorComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.name = 'Kek';
   }
 
-  isChecked(id: number): boolean {
-    const s = this.sentenceList[id];
-    //check voca
-    for(let v of s.vocabulary) {
-      if(!v.isChecked) return false;
-    }
+  // isChecked(id: number): boolean {
+  //   const s = this.sentenceList[id];
+  //   //check voca
+  //   for(let v of s.vocabulary) {
+  //     if(!v.isChecked) return false;
+  //   }
 
-    return !!s.pin.length && !!s.ua.length;
-  }
+  //   return !!s.pin.length && !!s.ua.length;
+  // }
 }

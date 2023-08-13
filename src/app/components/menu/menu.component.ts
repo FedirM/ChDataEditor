@@ -36,7 +36,6 @@ export class MenuComponent implements OnInit, OnDestroy {
           break;
         }
       }
-      console.log('is: ', this.isSaveDisabled);
 
       invoke("google_voca_close").then(res => {}).catch(console.error);
     });
