@@ -28,9 +28,14 @@
                         <input formControlName="ua" type="text" class="form-control" id="ukr" autocomplete="off">
                     </div>
                 </form>
-                <div class="nest-container">
-                    <p class="ru">{{word.nest.ru}}</p>
-                    <p class="hi">{{word.nest.ex}}</p>
+                <div (click)="switchNest()" [ngClass]="{showAll: showAll}" class="nest-container">
+                    <ng-container *ngIf="showAll; else three">
+                        <p class="ru mb-1" *ngFor="let line of splitText(word.nest.ru)">{{line}}</p>
+                        <p class="hi mb-1" *ngFor="let line of splitText(word.nest.ex)">{{line}}</p>
+                    </ng-container>
+                    <ng-template #three>
+                        <p class="ru mb-1" *ngFor="let line of splitText3(word.nest.ru)">{{line}}</p>
+                    </ng-template>
                 </div>
             </ng-container>
         </div>

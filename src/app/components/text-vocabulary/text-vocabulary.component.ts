@@ -16,6 +16,7 @@ export class TextVocabularyComponent implements OnInit, OnDestroy {
   word_list!: Array<VocaItem>;
   selected_id = -1;
   selected_sentence = 0;
+  showAll = false;
 
   constructor(private st: StateService, private fb: FormBuilder) {
     this.word_form = fb.group({
@@ -33,6 +34,7 @@ export class TextVocabularyComponent implements OnInit, OnDestroy {
           if(i !== this.selected_sentence) {
             this.selected_id = -1;
             this.selected_sentence = i;
+            this.showAll = false;
           }
         }
       }
@@ -61,7 +63,15 @@ export class TextVocabularyComponent implements OnInit, OnDestroy {
   }
 
   changeId(i: number): void {
-    this.selected_id = (i === this.selected_id) ? -1 : i;
+    console.log('GET I: ', i);
+    if(i === this.selected_id) {
+      this.selected_id = -1;
+      this.showAll = false;
+    } else {
+      this.selected_id = i;
+    }
+    console.log('Selected: ', this.selected_id);
+    
     this.word_form.patchValue({
       si: this.word_list.at(i)?.simplified,
       pin: this.word_list.at(i)?.pin,
@@ -83,6 +93,18 @@ export class TextVocabularyComponent implements OnInit, OnDestroy {
 
   getWordId(i: number): string {
     return `word_${i}`;
+  }
+
+  splitText(text: string): Array<string> {
+    return text.split(/[\n\r]/).filter(el => el);
+  }
+
+  splitText3(text: string): Array<string> {
+    return text.split(/[\n\r]/).filter(el => el).slice(0,3);
+  }
+
+  switchNest(): void {
+    this.showAll = !this.showAll;
   }
 
 }
