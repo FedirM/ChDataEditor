@@ -1,0 +1,24 @@
+
+<div class="layout">
+    <ng-container *ngIf="hasSelectedSentence(); else empty">
+        <h3 class="mb-5 mt-3 hi">{{selected_sentence.data}}</h3>
+        <form [formGroup]="sentence_form" class="w-100">
+            <div class="form-label mb-5">
+                <label for="simplified" class="form-label">Спрощений варіант</label>
+                <input formControlName="simplified" type="text" class="form-control" id="simplified" placeholder="Спрощений варіант" autocomplete="off">
+            </div>
+            <div class="form-label mb-5">
+                <label for="pin" class="form-label">Пиньїнь</label>
+                <input formControlName="pin" type="text" class="form-control" id="pin" placeholder="Пиньїнь" autocomplete="off">
+            </div>
+            <div class="form-label">
+                <label for="ukr" class="form-label">Український переклад</label>
+                <input formControlName="ua" type="text" class="form-control" id="ukr" placeholder="Український переклад" autocomplete="off">
+            </div>
+        </form>
+    </ng-container>
+</div>
+
+<ng-template #empty>
+    <app-empty-list></app-empty-list>
+</ng-template>

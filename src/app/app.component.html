@@ -1,0 +1,55 @@
+
+
+
+
+
+<div class="main-layout">
+  <div class="menu">
+    <app-menu></app-menu>
+  </div>
+  <div class="split-layout">
+    <as-split direction="horizontal" (dragEnd)="onDragSplitArea($event)">
+      <as-split-area [size]="splitAreaSizes[0]">
+        <div class="editor-container">
+          <app-text-editor></app-text-editor>
+        </div>
+      </as-split-area>
+      <as-split-area [size]="splitAreaSizes[1]">
+        <div class="non-scrollable">
+          <ng-container [ngTemplateOutlet]="tabs"></ng-container>
+        </div>
+      </as-split-area>
+    </as-split>
+  </div>
+</div>
+
+
+<ng-template #tabs>
+  <nav ngbNav #nav="ngbNav" class="nav-tabs justify-content-center">
+    <ng-container [ngbNavItem]="1" [disabled]="isTabDisabled">
+      <button ngbNavLink [ngClass]="{'sentence-checked': isVocaChecked}">Словник</button>
+      <ng-template ngbNavContent>
+        <div class="tab-content-container">
+          <app-text-vocabulary></app-text-vocabulary>
+        </div>
+      </ng-template>
+    </ng-container>
+    <ng-container [ngbNavItem]="2" [disabled]="isTabDisabled">
+      <button ngbNavLink [ngClass]="{'sentence-checked': isTextChecked}">Речення</button>
+      <ng-template ngbNavContent>
+        <div class="tab-content-container">
+          <app-sentence-info></app-sentence-info>
+        </div>
+      </ng-template>
+    </ng-container>
+    <ng-container [ngbNavItem]="3" [disabled]="isTabDisabled">
+      <button ngbNavLink >Додати слово</button>
+      <ng-template ngbNavContent>
+        <div class="tab-content-container">
+          <app-new-word></app-new-word>
+        </div>
+      </ng-template>
+    </ng-container>
+  </nav>
+  <div [ngbNavOutlet]="nav"></div>
+</ng-template>

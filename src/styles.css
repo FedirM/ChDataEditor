@@ -1,0 +1,117 @@
+
+:root {
+    --scrollbarBG: #dfdfdf;
+    --thumbBG: #7f8385;
+
+    --menu-height: 65px;
+
+    --checked-text: #2cab1b;
+    --checked-border: 1px solid #2a841e;
+
+    /* --active-bg: rgba(42, 132, 30, 0.6); */
+    --active-bg: linear-gradient(90deg, rgba(50, 129, 40, 0.362) 40%, rgba(255,255,255,1) 90%);
+    --active-color: #2651d1;
+
+    --hover-bg: linear-gradient(90deg, rgba(0, 0, 0, 0.3) 40%, rgba(255,255,255,1) 90%);
+
+    --bottom-padding: 150px;
+    --text-size: 1.2rem;
+}
+
+
+*::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+}
+*{
+    scrollbar-width: thin;
+    scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+*::-webkit-scrollbar-track {
+    background: var(--scrollbarBG);
+}
+*::-webkit-scrollbar-thumb {
+    background-color: var(--thumbBG) ;
+    border-radius: 6px;
+    border: 3px solid var(--scrollbarBG);
+}
+
+@font-face {
+    font-family: AdobeNormal;
+    font-style: normal;
+    src: url("AdobeTextPro-Regular.ttf") format("truetype");
+    font-weight: 100 1000;
+    font-stretch: 25% 151%;
+    font-display: auto;
+  }
+  
+  @font-face {
+    font-family: AdobeItalic;
+    font-style: oblique;
+    src: url("AdobeTextPro-it.ttf") format("truetype");
+    font-weight: 100 1000;
+    font-stretch: 25% 151%;
+    font-display: auto;
+  }
+  
+  @font-face {
+    font-family: AdobeBold;
+    font-style: normal;
+    src: url("AdobeTextPro-Bold.ttf") format("truetype");
+    font-weight: 400 1000;
+    font-stretch: 25% 151%;
+    font-display: auto;
+  }
+  
+  @font-face {
+    font-family: ZhongFont;
+    src: url("kaiu_DF_kai.ttf") format("truetype");
+    font-weight: 100 1000;
+    font-stretch: 25% 151%;
+    font-display: auto;
+  }
+
+*{
+    font-family: AdobeNormal, sans-serif;
+}
+
+.hi {
+    font-family: ZhongFont, sans-serif;
+}
+
+.ru {
+    font-family: AdobeNormal, sans-serif;
+}
+
+em {
+    font-family: AdobeItalic, sans-serif;
+}
+
+.full-h-w {
+    height: 100vh;
+    width: 100vw;
+    padding: 0!important;
+    margin: 0!important;
+}
+
+.br-0 {
+    border-radius: 0 !important;
+}
+
+.bx-none {
+    border-left: none !important;
+    border-right: none !important;
+}
+
+.sentence-checked {
+    color: var(--checked-text)
+}
+
+.sentence-active {
+    background: var(--active-bg);
+    color: var(--active-color);
+}
+
+.sentence-hover:hover {
+    background: var(--hover-bg);
+}

@@ -1,0 +1,41 @@
+
+.layout {
+
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: relative;
+}
+
+.text-editor {
+    width: 100%; 
+    height: 100%;
+    border: none;
+    resize: none;
+    padding:  10px 8px var(--bottom-padding) 8px;
+    font-size: var(--text-size);
+}
+
+.text-editor:focus-visible {
+    outline: none;
+    border: none;
+}
+
+.btn-container-position {
+  position: absolute;
+  top: 3px;
+  right: 8px;
+}
+
+.scrollable {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    cursor: pointer;
+    padding-bottom: var(--bottom-padding);
+}
+
+.sentence {
+    font-size: var(--text-size);
+}
+

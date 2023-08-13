@@ -1,0 +1,7 @@
+
+.empty-list-main {
+    width: 100%;
+    padding-top: 50px;
+    font-size: calc(var(--text-size) - 8px);
+    text-align: center;
+}

@@ -1,0 +1,44 @@
+
+<div *ngIf="hasVoca(); else empty" class="layout">
+    <div class="word-list">
+        <div
+        *ngFor="let word of word_list; let i = index"
+        class="word-item"
+        [id]="getWordId(i)"
+        >
+            <div (click)="changeId(i)" class="mb-3">
+                <div [ngClass]="{'sentence-checked': isChecked(word)}" class="hi hi-word">{{word.hi}}</div>
+                <div [ngClass]="{'sentence-checked': isChecked(word)}" class="pin">{{word.pin}}</div>
+            </div>
+            <ng-container *ngIf="isActive(i)">
+                <form [formGroup]="word_form" class="w-100 pb-3 border-bottom">
+                    <div class="d-flex flex-row justify-content-between mb-3">
+                        <div class="flex-grow-0">
+                            <label for="si" class="form-label">Спрощений</label>
+                            <input formControlName="si" type="text" class="form-control" id="si" autocomplete="off">
+                        </div>
+                        <div class="flex-grow-0">
+                            <label for="pin" class="form-label">Пиньїнь</label>
+                            <input formControlName="pin" type="text" class="form-control" id="pin" autocomplete="off">
+                        </div>
+                    </div>
+                    
+                    <div class="ms-2">
+                        <label for="ukr" class="form-label">Український переклад</label>
+                        <input formControlName="ua" type="text" class="form-control" id="ukr" autocomplete="off">
+                    </div>
+                </form>
+                <div class="nest-container">
+                    <p class="ru">{{word.nest.ru}}</p>
+                    <p class="hi">{{word.nest.ex}}</p>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
+
+
+
+<ng-template #empty>
+    <app-empty-list></app-empty-list>
+</ng-template>

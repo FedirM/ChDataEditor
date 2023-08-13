@@ -1,0 +1,32 @@
+
+<div *ngIf="isAvailable(); else empty" class="layout pt-4">
+    <form [formGroup]="form" class="pe-2">
+        <div class="row mb-3">
+            <div class="col-6 pe-2">
+                <label for="new-hi" class="form-label">Ієрогліф</label>
+                <input formControlName="hi" type="text" class="form-control hi" id="new-hi" autocomplete="off">
+            </div>
+            <div class="col-6 ps-2">
+                <label for="new-si" class="form-label">Спрощений</label>
+                <input formControlName="si" type="text" class="form-control hi" id="new-si" autocomplete="off">
+            </div>
+        </div>
+        <div class="col-6 ps-2">
+            <label for="new-pin" class="form-label">Пиньїнь</label>
+            <input formControlName="pin" type="text" class="form-control hi" id="new-pin" autocomplete="off">
+        </div>
+        <div class="mb-3">
+            <label for="new-ua" class="form-label">Український переклад</label>
+            <input formControlName="ua" type="text" class="form-control" id="new-ua" autocomplete="off">
+        </div>
+        <div class="d-grid gap-2 d-md-block text-center">
+            <button (click)="form.reset()" type="button" class="btn btn-outline-danger me-3">Видалити</button>
+            <button (click)="onSave()" type="button" class="btn btn-outline-success">Зберегти</button>
+        </div>
+    </form>
+</div>
+
+
+<ng-template #empty>
+    <app-empty-list></app-empty-list>
+</ng-template>

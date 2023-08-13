@@ -1,0 +1,51 @@
+
+
+
+.main-layout {
+
+
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0;
+}
+
+.menu {
+  flex: 0 0 var(--menu-height);
+  width: 100vw;
+}
+
+/* Tabs */
+.tab-content-container {
+  height: calc(100vh - 47px);
+  padding: 10px;
+}
+
+.split-layout {
+  flex: 1 1 calc(100vh - var(--menu-height));
+  max-height: calc(100vh - var(--menu-height));
+  width: 100vw;
+  /* height: 100vh; */
+  border: 1px solid rgba(0,0,0,0.2);
+}
+
+.editor-container {
+  width: 100%; 
+  height: calc(100% - 9px);
+  display: block;
+  position: relative;
+}
+
+.non-scrollable {
+  width: 100%;
+  height: calc(100% - 9px);
+  overflow: hidden;
+}
+
+.sentence-checked {
+  color: var(--checked-text)!important;
+}

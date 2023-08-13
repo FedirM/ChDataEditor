@@ -1,0 +1,27 @@
+<div class="modal-header">
+    <h4 class="modal-title">Settings</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="settingsGroup">
+        <div class="mb-3">
+            <label for="font-size" class="form-label">Font Size</label>
+            <input formControlName="fontSize" type="text" class="form-control" id="font-size" placeholder="Font Size">
+        </div>
+        <div class="mb-3">
+            <label for="bottom-padding" class="form-label">Bottom padding</label>
+            <input formControlName="bottomPadding" type="text" class="form-control" id="bottom-padding" placeholder="Bottom padding">
+        </div>
+        <div class="mb-3">
+            <label for="checked" class="form-label">Checked Color</label>
+            <input formControlName="checkedColor" type="color" class="form-control" id="checked" placeholder="Checked Color">
+        </div>
+        <div class="mb-3">
+            <label for="active" class="form-label">Active Color</label>
+            <input formControlName="activeColor" type="color" class="form-control" id="active" placeholder="Active Color">
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-success" (click)="onSaveClick()">Save</button>
+</div>
