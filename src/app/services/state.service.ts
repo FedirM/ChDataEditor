@@ -18,7 +18,7 @@ export class StateService {
   private _default_state: State = {
     sentenceList: [],
     unlisted: [],
-    text: '这是'
+    text: '这是什么？'
   }
 
   constructor(private tp: TextProcessorService) {

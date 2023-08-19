@@ -15,7 +15,7 @@ export class TextVocabularyComponent implements OnInit, OnDestroy {
   word_form: FormGroup;
   word_list: Array<VocaItem> = [];
   selected_id = -1;
-  selected_sentence = 0;
+  selected_sentence = -1;
   showAll = false;
 
   constructor(private st: StateService, private fb: FormBuilder) {
@@ -30,8 +30,10 @@ export class TextVocabularyComponent implements OnInit, OnDestroy {
     this.st.state$.pipe(takeUntil(this.onDestroy$)).subscribe(state => {
       for(let i = 0; i < state.sentenceList.length; i++) {
         if(state.sentenceList[i].inFocus && state.sentenceList[i].vocabulary.length) {
+          console.log('VOCA: ', state.sentenceList[i].vocabulary);
           if(i !== this.selected_sentence) {
             this.word_list = state.sentenceList[i].vocabulary;
+            console.log('LIST: ', this.word_list)
             this.selected_id = -1;
             this.selected_sentence = i;
             this.showAll = false;
@@ -43,7 +45,7 @@ export class TextVocabularyComponent implements OnInit, OnDestroy {
     this.word_form.valueChanges
     .pipe(
       filter(el => { return el.si.length && el.ua.length && el.pin.length }),
-      debounceTime(400),
+      debounceTime(100),
       distinctUntilChanged((prev, curr) => JSON.stringify(prev) === JSON.stringify(curr)),
       takeUntil(this.onDestroy$)
     ).subscribe((value) => {
@@ -63,18 +65,21 @@ export class TextVocabularyComponent implements OnInit, OnDestroy {
   }
 
   changeId(i: number): void {
-    if(i === this.selected_id) {
-      this.selected_id = -1;
-      this.showAll = false;
-    } else {
-      this.selected_id = i;
-    }
-    
-    this.word_form.patchValue({
-      si: this.word_list.at(i)?.simplified,
-      pin: this.word_list.at(i)?.pin,
-      ua: this.word_list.at(i)?.ua
-    });
+    setTimeout(() => {
+      if(i === this.selected_id) {
+        this.selected_id = -1;
+        this.showAll = false;
+      } else {
+        this.selected_id = i;
+      }
+      
+      this.word_form.patchValue({
+        si: this.word_list.at(i)?.simplified,
+        pin: this.word_list.at(i)?.pin,
+        ua: this.word_list.at(i)?.ua
+      }, { emitEvent: false });
+      console.log('[Change ID]: Patch word_form');
+    })
   }
 
   hasVoca(): boolean {
