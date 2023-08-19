@@ -9,8 +9,7 @@ use std::collections::HashMap;
 mod bkrs;
 use bkrs::BKRS;
 
-const BKRS_VOCA_PATH: &str = ".\\data\\bkrs.json";
-// const BKRS_FORMS_PATH: &str = "data/bkrsForms.json";
+const BKRS_VOCA_PATH: &str = "./data/bkrs.json";
 
 const GT_HI: &str = "tr_to_si";
 const GT_UA: &str = "tr_to_ua";
@@ -63,7 +62,7 @@ async fn google_translator_ua(text: String, app: tauri::AppHandle) {
         GT_UA,
         tauri::WindowUrl::External(format!("https://translate.google.com.ua/?hl=ru&sl=zh-TW&tl=uk&text={}&op=translate", encode(&text)).parse().unwrap())
     )
-    .initialization_script(INIT_SCRIPT_HI)
+    // .initialization_script(INIT_SCRIPT_HI)
     .build()
     .unwrap();
 
@@ -77,7 +76,7 @@ async fn google_translator_hi(text: String, app: tauri::AppHandle) {
         GT_HI,
         tauri::WindowUrl::External(format!("https://translate.google.com.ua/?hl=ru&sl=zh-TW&tl=zh-CN&text={}&op=translate", encode(&text)).parse().unwrap())
     )
-    .initialization_script(INIT_SCRIPT_HI)
+    // .initialization_script(INIT_SCRIPT_HI)
     .build()
     .unwrap();
 
@@ -128,16 +127,16 @@ fn main() {
 }
 
 
-const INIT_SCRIPT_HI: &str = r#"
-    const interval = setInterval(() => {
-        const spans = document.getElementsByTagName('span');
-        console.log(spans.length);
-        if(spans.length > 400) {
-            for(let i = 0; i < spans.length; i++){
-                console.log(`span #${i}: ${spans[i].innerText}`);
-            }
-            clearInterval(interval);
-            interval = null;
-        }
-    }, 600);
-"#;
+// const INIT_SCRIPT_HI: &str = r#"
+//     const interval = setInterval(() => {
+//         const spans = document.getElementsByTagName('span');
+//         console.log(spans.length);
+//         if(spans.length > 400) {
+//             for(let i = 0; i < spans.length; i++){
+//                 console.log(`span #${i}: ${spans[i].innerText}`);
+//             }
+//             clearInterval(interval);
+//             interval = null;
+//         }
+//     }, 600);
+// "#;

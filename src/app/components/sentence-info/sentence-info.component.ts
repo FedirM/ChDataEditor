@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Subject, debounceTime, distinctUntilChanged, filter, takeUntil } from 'rxjs';
+import { Subject, debounceTime, distinctUntilChanged, filter, takeUntil, take } from 'rxjs';
 import { Sentence } from 'src/app/interfaces/state';
 import { StateService } from 'src/app/services/state.service';
 
@@ -14,6 +14,7 @@ export class SentenceInfoComponent implements OnInit, OnDestroy {
   sentence_form: FormGroup;
   sentence_list!: Array<Sentence>;
   selected_id = -1;
+  selected_ch = '';
 
   constructor(private st: StateService, private fb: FormBuilder) {
     this.sentence_form = fb.group({
@@ -24,17 +25,21 @@ export class SentenceInfoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.st.state$.pipe(takeUntil(this.onDestroy$)).subscribe(state => {
+    this.st.state$.pipe(take(1)).subscribe(state => {
       this.sentence_list = state.sentenceList;
       this.selected_id = -1;
       for(let s of state.sentenceList){
         if(s.inFocus) {
           this.selected_id = s.id;
-          this.sentence_form.patchValue({
-            pin: s.pin,
-            ua: s.ua,
-            simplified: s.simplified
-          });
+          if(this.selected_ch !== s.data) {
+            this.selected_ch = s.data;
+            this.sentence_form.patchValue({
+              pin: s.pin,
+              ua: s.ua,
+              simplified: s.simplified
+            });
+          }
+          
           break;
         }
       }

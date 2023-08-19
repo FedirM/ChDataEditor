@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Subject, debounceTime, distinctUntilChanged, filter, pipe, takeUntil } from 'rxjs';
+import { Subject, debounceTime, distinctUntilChanged, filter, take, takeUntil } from 'rxjs';
 import { VocaItem } from 'src/app/interfaces/state';
 import { StateService } from 'src/app/services/state.service';
 
@@ -13,7 +13,7 @@ export class TextVocabularyComponent implements OnInit, OnDestroy {
 
   onDestroy$ = new Subject();
   word_form: FormGroup;
-  word_list!: Array<VocaItem>;
+  word_list: Array<VocaItem> = [];
   selected_id = -1;
   selected_sentence = 0;
   showAll = false;
@@ -63,14 +63,12 @@ export class TextVocabularyComponent implements OnInit, OnDestroy {
   }
 
   changeId(i: number): void {
-    console.log('GET I: ', i);
     if(i === this.selected_id) {
       this.selected_id = -1;
       this.showAll = false;
     } else {
       this.selected_id = i;
     }
-    console.log('Selected: ', this.selected_id);
     
     this.word_form.patchValue({
       si: this.word_list.at(i)?.simplified,

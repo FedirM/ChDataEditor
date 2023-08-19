@@ -1,5 +1,5 @@
 
-
+#[allow(non_snake_case)]
 pub mod BKRS {
     use serde::{Deserialize, Serialize};
     use std::collections::HashMap;

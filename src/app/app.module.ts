@@ -18,7 +18,6 @@ import { MenuComponent } from './components/menu/menu.component';
 function appInit(): Promise<void> {
   return new Promise((resolve, reject) => {
     const css_str = localStorage.getItem('css_variables');
-    console.log('LOCALSTORAGE: ', css_str);
     if(css_str) {
       const styles = document.documentElement.style;
       const values = JSON.parse(css_str);
