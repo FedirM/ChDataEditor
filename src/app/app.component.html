@@ -25,7 +25,7 @@
 
 
 <ng-template #tabs>
-  <nav ngbNav #nav="ngbNav" class="nav-tabs justify-content-center">
+  <nav ngbNav [(activeId)]="activeTab" #nav="ngbNav" class="nav-tabs justify-content-center">
     <ng-container [ngbNavItem]="1" [disabled]="isTabDisabled">
       <button ngbNavLink [ngClass]="{'sentence-checked': isVocaChecked}">Словник</button>
       <ng-template ngbNavContent>

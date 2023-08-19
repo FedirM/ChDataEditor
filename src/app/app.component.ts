@@ -15,6 +15,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private onDestroy$ = new Subject();
   splitAreaSizes = [60, 40];
+  activeTab     = 1;
   isVocaChecked = false;
   isTextChecked = false;
   isTabDisabled = false;
@@ -48,6 +49,7 @@ export class AppComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.onDestroy$))
     .subscribe(m => {
       this.isTabDisabled = m === Mode.Editor;
+      this.activeTab = 1;
     })
   }
 
