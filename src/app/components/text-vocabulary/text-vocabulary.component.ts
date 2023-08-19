@@ -29,9 +29,9 @@ export class TextVocabularyComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.st.state$.pipe(takeUntil(this.onDestroy$)).subscribe(state => {
       for(let i = 0; i < state.sentenceList.length; i++) {
-        if(state.sentenceList[i].inFocus) {
-          this.word_list = state.sentenceList[i].vocabulary;
+        if(state.sentenceList[i].inFocus && state.sentenceList[i].vocabulary.length) {
           if(i !== this.selected_sentence) {
+            this.word_list = state.sentenceList[i].vocabulary;
             this.selected_id = -1;
             this.selected_sentence = i;
             this.showAll = false;
@@ -44,7 +44,7 @@ export class TextVocabularyComponent implements OnInit, OnDestroy {
     .pipe(
       filter(el => { return el.si.length && el.ua.length && el.pin.length }),
       debounceTime(400),
-      distinctUntilChanged((prev, curr) => (prev.si === curr.si && prev.pin === curr.pin && prev.ua === curr.ua)),
+      distinctUntilChanged((prev, curr) => JSON.stringify(prev) === JSON.stringify(curr)),
       takeUntil(this.onDestroy$)
     ).subscribe((value) => {
       if(this.selected_id === -1) return;

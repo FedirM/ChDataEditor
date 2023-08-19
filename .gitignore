@@ -2,6 +2,9 @@
 
 DESIGN/
 
+# Data folder
+/src-tauri/data
+
 # Compiled output
 /dist
 /tmp
